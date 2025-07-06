@@ -1,6 +1,7 @@
 .block-explorer-nav {
   display: flex;
   flex-direction: column;
+  min-width: 16rem;
   max-width: 16rem;
   flex: 1;
   gap: 1rem;
@@ -73,6 +74,7 @@
 
 @media (max-width: 60rem) {
   .block-explorer-nav {
+    min-width: unset;
     max-width: unset;
   }
 

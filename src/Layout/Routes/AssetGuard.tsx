@@ -1,7 +1,8 @@
-import type { PropsWithChildren } from 'react';
 import { Navigate, useParams } from 'react-router';
 
 import { ASSETS, type Asset } from '../../types';
+
+import type { PropsWithChildren } from 'react';
 
 /**
  * This component is used to guard the routes to only allow the allowed assets.

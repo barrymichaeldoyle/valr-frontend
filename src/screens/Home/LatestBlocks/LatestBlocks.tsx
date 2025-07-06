@@ -1,31 +1,24 @@
 import './LatestBlocks.css';
+
+import { useNavigate } from 'react-router';
+
+import { mockBlocks } from './data';
 import { formatHash } from './utils/formatHash';
 
-const mockBlocks = [
-  {
-    height: 800000,
-    hash: '00000000000000000005ca55a40c80213c61e5dfc6a5c2d6d38263303ead1468',
-    mined: '2 minutes ago',
-    miner: 'MiningPool_Alpha',
-    size: '1,259,633 bytes',
-  },
-  {
-    height: 799999,
-    hash: '00000000000000000004b8a5a40c80213c61e5dfc6a5c2d6d38263303ead1467',
-    mined: '5 minutes ago',
-    miner: 'CryptoMiner_Pro',
-    size: '1,198,745 bytes',
-  },
-  {
-    height: 799998,
-    hash: '00000000000000000003a7b4a40c80213c61e5dfc6a5c2d6d38263303ead1466',
-    mined: '8 minutes ago',
-    miner: 'BlockForge_2024',
-    size: '1,342,891 bytes',
-  },
-];
-
 export function LatestBlocks() {
+  const navigate = useNavigate();
+
+  function handleRowClick(height: number) {
+    navigate(`/btc/${height}`);
+  }
+
+  function handleKeyDown(event: React.KeyboardEvent, height: number) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      handleRowClick(height);
+    }
+  }
+
   return (
     <div className="latest-blocks">
       <h2>Latest Blocks</h2>
@@ -41,20 +34,27 @@ export function LatestBlocks() {
             </tr>
           </thead>
           <tbody>
+            {/* TODO: Create a component for the block row after data hookup */}
             {mockBlocks.map((block, index) => (
-              <tr key={index} className="block-row">
-                <td className="height-cell">
-                  <a href={`/btc/${block.height}`} className="block-link">
-                    {block.height.toLocaleString()}
-                  </a>
+              <tr
+                key={index}
+                className="block-row"
+                onClick={() => handleRowClick(block.height)}
+                onKeyDown={e => handleKeyDown(e, block.height)}
+                tabIndex={0}
+                role="button"
+                aria-label={`View details for block ${block.height.toLocaleString()}`}
+              >
+                <td className="height-cell block-link">
+                  {block.height.toLocaleString()}
                 </td>
-                <td className="hash-cell">
+                <td className="hash-cell block-link">
                   <span className="hash-text" title={block.hash}>
                     {formatHash(block.hash)}
                   </span>
                 </td>
                 <td className="mined-cell">{block.mined}</td>
-                <td className="miner-cell">
+                <td className="miner-cell block-link">
                   <span className="miner-text" title={block.miner}>
                     {block.miner}
                   </span>

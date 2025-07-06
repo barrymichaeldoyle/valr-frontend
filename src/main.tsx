@@ -1,8 +1,9 @@
+import './main.css';
+
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
 
-import './main.css';
 import { Layout } from './Layout/Layout';
 
 const rootElement = document.getElementById('root');

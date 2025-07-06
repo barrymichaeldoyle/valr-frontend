@@ -1,5 +1,6 @@
-import { Search as SearchIcon } from 'lucide-react';
 import './Search.css';
+import { Search as SearchIcon } from 'lucide-react';
+
 import { useSearch } from './useSearch';
 
 const SEARCH_PLACEHOLDER = 'Search for things like address, transaction, block';
