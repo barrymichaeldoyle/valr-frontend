@@ -1,3 +1,11 @@
+import { BlockExplorer } from './BlockExplorer/BlockExplorer';
+
 export function Home() {
-  return <div>Home</div>;
+  return (
+    <div>
+      <BlockExplorer />
+
+      <div></div>
+    </div>
+  );
 }

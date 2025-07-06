@@ -1,8 +1,11 @@
-import { Route, Routes } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 
 import './Layout.css';
-import { Home } from '../screens/Home/Home';
+
 import { Block } from '../screens/Block/Block';
+import { Home } from '../screens/Home/Home';
+
+import { AssetGuard } from './Routes/AssetGuard';
 
 export function Layout() {
   return (
@@ -12,8 +15,23 @@ export function Layout() {
       </header>
       <main>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/blocks/:asset/:blockNumber" element={<Block />} />
+          <Route path="/" element={<Navigate to="/btc" replace />} />
+          <Route
+            path="/:asset"
+            element={
+              <AssetGuard>
+                <Home />
+              </AssetGuard>
+            }
+          />
+          <Route
+            path="/:asset/:blockNumber"
+            element={
+              <AssetGuard>
+                <Block />
+              </AssetGuard>
+            }
+          />
         </Routes>
       </main>
     </>

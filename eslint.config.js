@@ -5,6 +5,7 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import prettier from 'eslint-plugin-prettier';
 import { globalIgnores } from 'eslint/config';
+import importPlugin from 'eslint-plugin-import';
 
 export default tseslint.config([
   globalIgnores(['dist']),
@@ -18,9 +19,17 @@ export default tseslint.config([
     ],
     plugins: {
       prettier: prettier,
+      import: importPlugin,
     },
     rules: {
       'prettier/prettier': 'error',
+      'import/order': [
+        'error',
+        {
+          'newlines-between': 'always',
+          alphabetize: { order: 'asc', caseInsensitive: true },
+        },
+      ],
     },
     languageOptions: {
       ecmaVersion: 2020,
