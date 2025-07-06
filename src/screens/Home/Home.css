@@ -11,3 +11,24 @@
   flex-direction: column;
   flex: 1;
 }
+
+@media (max-width: 60rem) {
+  .home-container {
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 48rem) {
+  .home-container {
+    gap: 1.5rem;
+    padding-top: 1rem;
+  }
+}
+
+@media (max-width: 30rem) {
+  .home-container {
+    gap: 1rem;
+    padding-top: 0.5rem;
+  }
+}

@@ -40,3 +40,9 @@
 .search-input:focus-visible {
   outline: var(--focus);
 }
+
+@media (max-width: 40rem) {
+  .search-bar {
+    flex-direction: column;
+  }
+}

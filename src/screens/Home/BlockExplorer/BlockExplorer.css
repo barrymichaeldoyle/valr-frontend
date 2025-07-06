@@ -12,9 +12,15 @@
 }
 
 .block-explorer-list {
+  display: flex;
+  flex-direction: column;
   list-style: none;
   padding: 0;
   margin: 0;
+}
+
+.block-explorer-item {
+  flex: 1;
 }
 
 .block-explorer-item + .block-explorer-item {
@@ -63,4 +69,25 @@
 .block-explorer-price {
   color: var(--secondary-text-color);
   font-size: 0.95rem;
+}
+
+@media (max-width: 60rem) {
+  .block-explorer-nav {
+    max-width: unset;
+  }
+
+  .block-explorer-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .block-explorer-item + .block-explorer-item {
+    margin-top: 0;
+  }
+}
+
+@media (max-width: 40rem) {
+  .block-explorer-list {
+    flex-direction: column;
+  }
 }

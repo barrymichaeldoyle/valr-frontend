@@ -1,7 +1,7 @@
+import { BCH, BTC, ETH } from '../../../icons';
 import { Link, useParams } from 'react-router';
 
-import { BCH, BTC, ETH } from '../../../icons';
-import './BlockExplorer.css'; // Create this for your styles
+import './BlockExplorer.css';
 
 const ASSETS = [
   { code: 'btc', name: 'Bitcoin', icon: <BTC />, price: '$9,273.76' },
