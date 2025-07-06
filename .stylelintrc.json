@@ -1,0 +1,6 @@
+{
+  "extends": "stylelint-config-recommended",
+  "rules": {
+    "unit-allowed-list": ["rem", "s", "vh", "%"]
+  }
+}
