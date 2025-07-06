@@ -1,6 +1,6 @@
 :root {
   background-color: #ffffff;
-  color: #000000;
+  color: var(--text-color);
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
   line-height: 1.5;
@@ -8,6 +8,11 @@
   text-rendering: optimizelegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --focus: 0.25rem auto -webkit-focus-ring-color;
+  --radius: 0.2rem;
+  --text-color: #000000;
+  --secondary-text-color: #888888;
 }
 
 body {
@@ -39,21 +44,33 @@ a:hover {
 
 button {
   cursor: pointer;
-  transition: border-color 0.25s;
-  padding: 0.6rem 1.2rem;
+  color: #fff;
+  transition: opacity 0.25s;
+  padding: 0.5rem 2rem;
   border: 0.0625rem solid transparent;
-  border-radius: 0.5rem;
-  background-color: #1a1a1a;
+  border-radius: var(--radius);
+  background-color: #7daff5;
   font-family: inherit;
   font-size: 1rem;
   font-weight: 500;
 }
 
 button:hover {
-  border-color: #646cff;
+  opacity: 0.8;
 }
 
 button:focus,
 button:focus-visible {
-  outline: 0.25rem auto -webkit-focus-ring-color;
+  outline: var(--focus);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 0.0625rem;
+  height: 0.0625rem;
+  padding: 0;
+  margin: -0.0625rem;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
 }
