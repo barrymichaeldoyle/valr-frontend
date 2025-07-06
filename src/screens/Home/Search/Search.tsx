@@ -1,15 +1,19 @@
 import { Search as SearchIcon } from 'lucide-react';
 import './Search.css';
+import { useSearch } from './useSearch';
 
 const SEARCH_PLACEHOLDER = 'Search for things like address, transaction, block';
 const SEARCH_INPUT_ID = 'block-explorer-search';
 
 export function Search() {
+  const { searchValue, handleSearchChange, handleSearchSubmit } = useSearch();
+
   return (
     <form
       className="search-bar"
       role="search"
       aria-label="Block Explorer Search"
+      onSubmit={handleSearchSubmit}
     >
       <label htmlFor={SEARCH_INPUT_ID} className="visually-hidden">
         {SEARCH_PLACEHOLDER}
@@ -23,6 +27,8 @@ export function Search() {
           placeholder={SEARCH_PLACEHOLDER}
           autoComplete="off"
           aria-label="Search"
+          value={searchValue}
+          onChange={handleSearchChange}
         />
       </div>
       <button type="submit">Search</button>
