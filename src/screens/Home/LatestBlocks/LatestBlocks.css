@@ -15,7 +15,7 @@
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9rem;
-  table-layout: auto;
+  table-layout: fixed;
 }
 
 .blocks-table th {
@@ -45,32 +45,40 @@
 /* Column width constraints */
 .blocks-table th:nth-child(1), /* Height */
 .blocks-table td:nth-child(1) {
-  width: 6rem;
-  flex-shrink: 0;
+  width: 5rem;
+  min-width: 5rem;
 }
 
 .blocks-table th:nth-child(2), /* Hash */
 .blocks-table td:nth-child(2) {
-  flex: 1;
-  min-width: 0;
+  width: 60%;
+  min-width: 20rem;
+}
+
+@media (max-width: 48rem) {
+  .blocks-table th:nth-child(2),
+  .blocks-table td:nth-child(2) {
+    width: 10rem;
+    min-width: 10rem;
+  }
 }
 
 .blocks-table th:nth-child(3), /* Mined */
 .blocks-table td:nth-child(3) {
-  width: 5rem;
-  flex-shrink: 0;
+  width: 6rem;
+  min-width: 6rem;
 }
 
 .blocks-table th:nth-child(4), /* Miner */
 .blocks-table td:nth-child(4) {
   width: 8rem;
-  flex-shrink: 0;
+  min-width: 8rem;
 }
 
 .blocks-table th:nth-child(5), /* Size */
 .blocks-table td:nth-child(5) {
   width: 7rem;
-  flex-shrink: 0;
+  min-width: 7rem;
 }
 
 /* Mobile responsive design */

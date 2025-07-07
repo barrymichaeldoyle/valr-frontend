@@ -1,6 +1,6 @@
 import './BlockExplorer.css';
 
-import { Link, useParams } from 'react-router';
+import { useParams } from 'react-router';
 
 import { BCH, BTC, ETH } from '../../../icons';
 
@@ -19,17 +19,15 @@ export function BlockExplorer() {
       <ul className="block-explorer-list">
         {ASSETS.map(({ code, name, icon, price }) => (
           <li key={code} className="block-explorer-item">
-            <Link
-              to={`/${code}`}
-              className={`block-explorer-link${asset === code ? ' active' : ''}`}
-              aria-current={asset === code ? 'page' : undefined}
+            <div
+              className={`block-explorer-card${asset === code ? ' active' : ''}`}
             >
               <span className="block-explorer-icon">{icon}</span>
               <span className="block-explorer-text">
                 <span className="block-explorer-label">{name}</span>
                 <span className="block-explorer-price">{price}</span>
               </span>
-            </Link>
+            </div>
           </li>
         ))}
       </ul>

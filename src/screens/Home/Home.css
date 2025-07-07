@@ -1,7 +1,7 @@
 .home-container {
   display: flex;
   flex-direction: row;
-  gap: 4rem;
+  gap: 2rem;
   padding-top: 2rem;
 }
 
@@ -11,10 +11,15 @@
   flex: 1;
 }
 
+@media (max-width: 80rem) {
+  .home-container {
+    gap: 0;
+  }
+}
+
 @media (max-width: 60rem) {
   .home-container {
     flex-direction: column;
-    gap: 2rem;
   }
 }
 

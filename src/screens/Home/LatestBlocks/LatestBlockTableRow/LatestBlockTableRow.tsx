@@ -7,16 +7,11 @@ import { useGetBlockDetails } from '../../../../api';
 import { LoadingCell } from './components';
 import { formatHash, formatTimestamp, pluralize } from './utils';
 
+import type { GetBlockSummaryResponseItem } from '../../../../api';
 import type { KeyboardEvent } from 'react';
 
-interface Block {
-  height: number;
-  hash: string;
-  time: number;
-}
-
 interface LatestBlockTableRowProps {
-  block: Block;
+  block: GetBlockSummaryResponseItem;
   index: number;
 }
 
@@ -33,7 +28,7 @@ export function LatestBlockTableRow({
   } = useGetBlockDetails(block.hash);
 
   function handleRowClick(height: number) {
-    navigate(`/btc/${height}`);
+    navigate(`/${height}`);
   }
 
   function handleKeyDown(event: KeyboardEvent, height: number) {

@@ -28,22 +28,15 @@
   margin-top: 0.5rem;
 }
 
-.block-explorer-link {
+.block-explorer-card {
   display: flex;
   align-items: center;
   padding: 0.75rem;
   border-radius: var(--radius);
-  text-decoration: none;
   color: #000;
-  transition: background 0.2s;
 }
 
-.block-explorer-link:hover,
-.block-explorer-link:focus {
-  background: #f0f4fa;
-}
-
-.block-explorer-link.active {
+.block-explorer-card.active {
   background: #ebf0f5;
 }
 

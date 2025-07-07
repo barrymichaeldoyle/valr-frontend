@@ -8,22 +8,53 @@ export type GetBlocksResponseItem = {
 
 export type GetBlocksResponse = GetBlocksResponseItem[];
 
+export type GetBlockSummaryResponseItem = {
+  hash: string;
+  height: number;
+  mainchain: boolean;
+  previous: string;
+  time: number;
+  version: number;
+  bits: number;
+  size: number;
+  tx: string[];
+  merkle: string;
+  subsidy: number;
+  fees: number;
+  outputs: number;
+  work: number;
+  weight: number;
+};
+
+export type GetBlockSummaryResponse = GetBlockSummaryResponseItem[];
+
 export const LATEST_BLOCKS_QUERY_KEY = 'latestBlocks';
 
 export function useGetLatestBlocksSummary() {
-  return useQuery<GetBlocksResponse>({
+  return useQuery<GetBlockSummaryResponse>({
     queryKey: [LATEST_BLOCKS_QUERY_KEY],
     queryFn: getLatestBlocks,
   });
 }
 
-async function getLatestBlocks(): Promise<GetBlocksResponse> {
-  const todayBlocksRes = await fetch(
+async function getLatestBlocks(): Promise<GetBlockSummaryResponse> {
+  const latestBlocksRes = await fetch(
     `https://blockchain.info/blocks/${Date.now()}?format=json&cors=true`
   );
-  const todayBlocks = (await todayBlocksRes.json()) as GetBlocksResponse;
+  const latestBlocks = (await latestBlocksRes.json()) as GetBlocksResponse;
 
-  const latestBlocks = todayBlocks.slice(0, 15);
+  const fifteenMostRecentBlocks = latestBlocks.slice(0, 15);
 
-  return latestBlocks;
+  const blockHeightsStringParam = fifteenMostRecentBlocks
+    .map(block => block.height)
+    .join(',');
+
+  const blockSummariesRes = await fetch(
+    `https://api.blockchain.info/haskoin-store/btc/block/heights?heights=${blockHeightsStringParam}&notx=true&cors=true`
+  );
+
+  const blockSummaries =
+    (await blockSummariesRes.json()) as GetBlockSummaryResponse;
+
+  return blockSummaries;
 }

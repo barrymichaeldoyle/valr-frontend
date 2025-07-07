@@ -28,37 +28,27 @@
   background: rgba(59, 130, 246, 0.1);
 }
 
-/* Column width constraints */
-.block-row td:nth-child(1) {
-  width: 6rem;
-  flex-shrink: 0;
-}
-
-.block-row td:nth-child(2) {
-  flex: 1;
-  min-width: 0;
-}
-
-.block-row td:nth-child(3) {
-  width: 5rem;
-  flex-shrink: 0;
-}
-
-.block-row td:nth-child(4) {
-  width: 8rem;
-  flex-shrink: 0;
-}
-
-.block-row td:nth-child(5) {
-  width: 7rem;
-  flex-shrink: 0;
-}
-
 /* Cell styles */
 .block-link {
   color: var(--text-color-link);
   text-decoration: none;
   font-weight: 600;
+}
+
+/* Hash cell specific styling */
+.hash-cell {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Non-hash cells should not truncate */
+.height-cell,
+.mined-cell,
+.miner-cell,
+.size-cell {
+  overflow: visible;
+  white-space: nowrap;
 }
 
 /* Shared styles for truncated text */
@@ -68,14 +58,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-
-.mined-cell {
-  white-space: nowrap;
-}
-
-.size-cell {
-  white-space: nowrap;
+  max-width: 100%;
 }
 
 /* Mobile responsive design */

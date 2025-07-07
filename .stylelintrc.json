@@ -1,6 +1,6 @@
 {
   "extends": "stylelint-config-recommended",
   "rules": {
-    "unit-allowed-list": ["rem", "s", "vh", "%", "deg"]
+    "unit-allowed-list": ["rem", "s", "vh", "%", "deg", "fr"]
   }
 }
