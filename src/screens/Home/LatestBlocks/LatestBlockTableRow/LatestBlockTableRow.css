@@ -1,0 +1,107 @@
+/* Table row styles */
+.block-row {
+  position: relative;
+}
+
+.block-row::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: transparent;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.block-row:hover::after {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.block-row:focus {
+  outline: 0.125rem solid var(--focus-color);
+  outline-offset: -0.125rem;
+}
+
+.block-row:focus::after {
+  background: rgba(59, 130, 246, 0.1);
+}
+
+/* Column width constraints */
+.block-row td:nth-child(1) {
+  width: 6rem;
+  flex-shrink: 0;
+}
+
+.block-row td:nth-child(2) {
+  flex: 1;
+  min-width: 0;
+}
+
+.block-row td:nth-child(3) {
+  width: 5rem;
+  flex-shrink: 0;
+}
+
+.block-row td:nth-child(4) {
+  width: 8rem;
+  flex-shrink: 0;
+}
+
+.block-row td:nth-child(5) {
+  width: 7rem;
+  flex-shrink: 0;
+}
+
+/* Cell styles */
+.block-link {
+  color: var(--text-color-link);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.hash-text {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.miner-text {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mined-cell {
+  white-space: nowrap;
+}
+
+.size-cell {
+  white-space: nowrap;
+}
+
+/* Mobile responsive design */
+@media (max-width: 48rem) {
+  .hash-text,
+  .miner-text {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 30rem) {
+  .hash-text,
+  .miner-text {
+    font-size: 0.75rem;
+  }
+}
+
+/* Extra small screens (iPhone SE and similar) */
+@media (max-width: 23.4375rem) {
+  .hash-text,
+  .miner-text {
+    font-size: 0.7rem;
+  }
+}

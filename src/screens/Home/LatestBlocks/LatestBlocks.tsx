@@ -1,22 +1,27 @@
 import './LatestBlocks.css';
 
-import { useNavigate } from 'react-router';
+import { useGetLatestBlocksSummary } from '../../../api';
+import {
+  ErrorContainer,
+  LoadingContainer,
+  NotFoundContainer,
+} from '../../../components';
 
-import { mockBlocks } from './data';
-import { formatHash } from './utils/formatHash';
+import { LatestBlockTableRow } from './LatestBlockTableRow/LatestBlockTableRow';
 
 export function LatestBlocks() {
-  const navigate = useNavigate();
+  const { data, isLoading, error } = useGetLatestBlocksSummary();
 
-  function handleRowClick(height: number) {
-    navigate(`/btc/${height}`);
+  if (isLoading) {
+    return <LoadingContainer message="Fetching latest blocks..." />;
   }
 
-  function handleKeyDown(event: React.KeyboardEvent, height: number) {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      handleRowClick(height);
-    }
+  if (error) {
+    return <ErrorContainer message="Failed to fetch latest blocks" />;
+  }
+
+  if (!data || (Array.isArray(data) && data.length === 0)) {
+    return <NotFoundContainer message="Couldn't find latest blocks" />;
   }
 
   return (
@@ -34,33 +39,8 @@ export function LatestBlocks() {
             </tr>
           </thead>
           <tbody>
-            {/* TODO: Create a component for the block row after data hookup */}
-            {mockBlocks.map((block, index) => (
-              <tr
-                key={index}
-                className="block-row"
-                onClick={() => handleRowClick(block.height)}
-                onKeyDown={e => handleKeyDown(e, block.height)}
-                tabIndex={0}
-                role="button"
-                aria-label={`View details for block ${block.height.toLocaleString()}`}
-              >
-                <td className="height-cell block-link">
-                  {block.height.toLocaleString()}
-                </td>
-                <td className="hash-cell block-link">
-                  <span className="hash-text" title={block.hash}>
-                    {formatHash(block.hash)}
-                  </span>
-                </td>
-                <td className="mined-cell">{block.mined}</td>
-                <td className="miner-cell block-link">
-                  <span className="miner-text" title={block.miner}>
-                    {block.miner}
-                  </span>
-                </td>
-                <td className="size-cell">{block.size}</td>
-              </tr>
+            {data.map((block, index) => (
+              <LatestBlockTableRow key={index} block={block} index={index} />
             ))}
           </tbody>
         </table>

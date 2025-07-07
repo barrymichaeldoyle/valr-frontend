@@ -1,3 +1,5 @@
+// TODO: remove this file
+
 export const mockBlocks = [
   {
     height: 800000,

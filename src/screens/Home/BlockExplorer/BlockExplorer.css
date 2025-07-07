@@ -68,7 +68,7 @@
 }
 
 .block-explorer-price {
-  color: var(--secondary-text-color);
+  color: var(--text-color-secondary);
   font-size: 0.95rem;
 }
 

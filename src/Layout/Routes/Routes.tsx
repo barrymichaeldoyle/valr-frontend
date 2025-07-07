@@ -18,7 +18,7 @@ export function Routes() {
         }
       />
       <Route
-        path="/:asset/:blockNumber"
+        path="/:asset/:blockHash"
         element={
           <AssetGuard>
             <Block />

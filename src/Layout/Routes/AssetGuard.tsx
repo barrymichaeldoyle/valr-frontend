@@ -1,6 +1,6 @@
 import { Navigate, useParams } from 'react-router';
 
-import { ASSETS, type Asset } from '../../types';
+import { ASSETS, type Asset } from '../../constants';
 
 import type { PropsWithChildren } from 'react';
 

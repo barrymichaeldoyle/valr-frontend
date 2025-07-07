@@ -1,0 +1,7 @@
+.not-found-icon {
+  color: var(--text-color-secondary);
+}
+
+.not-found-title {
+  color: var(--text-color);
+}
