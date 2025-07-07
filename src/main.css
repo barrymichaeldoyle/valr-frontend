@@ -9,7 +9,8 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  --focus: 0.25rem auto -webkit-focus-ring-color;
+  --focus-color: #3b82f6;
+  --focus: 0.25rem auto var(--focus-color);
   --radius: 0.2rem;
   --text-color: #000000;
   --secondary-text-color: #888888;
@@ -28,7 +29,7 @@ body {
 
 main {
   width: 100%;
-  max-width: 75rem;
+  max-width: 90rem;
   margin: 0 auto;
   padding: 0 1rem;
   box-sizing: border-box;
