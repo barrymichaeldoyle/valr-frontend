@@ -54,8 +54,7 @@ export function LatestBlockTableRow({
       onClick={() => handleRowClick(block.height)}
       onKeyDown={e => handleKeyDown(e, block.height)}
       tabIndex={0}
-      role="button"
-      aria-label={`View details for block ${block.height.toLocaleString()}`}
+      aria-label={`Block ${block.height.toLocaleString()}: ${formatHash(block.hash)}. Click to view details.`}
     >
       <td className="height-cell block-link">
         {block.height.toLocaleString()}
@@ -66,20 +65,17 @@ export function LatestBlockTableRow({
         </span>
       </td>
       <td className="mined-cell">{formatTimestamp(block.time)}</td>
-      <td
-        className={`miner-cell ${blockDetails?.relayed_by ? 'block-link' : ''}`}
-      >
+      <td className="miner-cell">
         <LoadingCell
           isLoading={isLoading}
           error={error}
-          data={blockDetails?.relayed_by}
-          renderData={relayedBy => (
-            <span className="miner-text" title={relayedBy}>
-              {relayedBy}
+          data={blockDetails?.miner}
+          renderData={miner => (
+            <span className="miner-text" title={miner}>
+              {miner}
             </span>
           )}
           fallbackText="Unknown"
-          className="miner-text"
         />
       </td>
       <td className="size-cell">

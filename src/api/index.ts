@@ -1,2 +1,2 @@
-export * from './useGetBlockDetails';
-export * from './useGetLatestBlocksSummary';
+export * from './useGetBlockDetails/useGetBlockDetails';
+export * from './useGetLatestBlocksSummary/useGetLatestBlocksSummary';
