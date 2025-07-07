@@ -27,14 +27,14 @@ export function LatestBlockTableRow({
     error,
   } = useGetBlockDetails(block.hash);
 
-  function handleRowClick(height: number) {
-    navigate(`/${height}`);
+  function handleRowClick() {
+    navigate(`/${block.height}`);
   }
 
-  function handleKeyDown(event: KeyboardEvent, height: number) {
-    if (event.key === 'Enter' || event.key === ' ') {
-      event.preventDefault();
-      handleRowClick(height);
+  function handleKeyDown(e: KeyboardEvent) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleRowClick();
     }
   }
 
@@ -46,10 +46,10 @@ export function LatestBlockTableRow({
     <tr
       key={index}
       className="block-row"
-      onClick={() => handleRowClick(block.height)}
-      onKeyDown={e => handleKeyDown(e, block.height)}
+      onClick={handleRowClick}
+      onKeyDown={handleKeyDown}
       tabIndex={0}
-      aria-label={`Block ${block.height.toLocaleString()}: ${formatHash(block.hash)}. Click to view details.`}
+      aria-label={`Block ${block.height}. Click to view details.`}
     >
       <td className="height-cell block-link">
         {block.height.toLocaleString()}
@@ -66,22 +66,17 @@ export function LatestBlockTableRow({
           error={error}
           data={blockDetails?.miner}
           renderData={miner => (
-            <span className="miner-text" title={miner}>
+            <span
+              className={`miner-text${miner === 'Unknown' ? '' : ' block-link'}`}
+              title={miner}
+            >
               {miner}
             </span>
           )}
           fallbackText="Unknown"
         />
       </td>
-      <td className="size-cell">
-        <LoadingCell
-          isLoading={isLoading}
-          error={error}
-          data={blockDetails?.size}
-          renderData={size => formatSize(size)}
-          fallbackText="Unknown"
-        />
-      </td>
+      <td className="size-cell">{formatSize(block.size)}</td>
     </tr>
   );
 }

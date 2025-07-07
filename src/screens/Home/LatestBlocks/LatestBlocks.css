@@ -71,8 +71,8 @@
 
 .blocks-table th:nth-child(4), /* Miner */
 .blocks-table td:nth-child(4) {
-  width: 8rem;
-  min-width: 8rem;
+  width: 7rem;
+  min-width: 7rem;
 }
 
 .blocks-table th:nth-child(5), /* Size */
