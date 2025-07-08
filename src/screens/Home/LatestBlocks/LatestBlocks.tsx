@@ -1,12 +1,12 @@
 import './LatestBlocks.css';
 
-import { useGetLatestBlocksSummary } from '../../../api';
 import {
   ErrorContainer,
   LoadingContainer,
   NotFoundContainer,
 } from '../../../components';
 
+import { useGetLatestBlocksSummary } from './api';
 import { LatestBlockTableRow } from './LatestBlockTableRow/LatestBlockTableRow';
 
 export function LatestBlocks() {

@@ -1,3 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
+
 type PoolInfo = {
   name: string;
   link: string;
@@ -22,7 +24,7 @@ let miningPoolsData: MiningPoolsData | null = null;
  * or anywhere else in the codebase.
  * This significantly reduces the size of the data file.
  */
-export async function loadMiningPoolsData(): Promise<MiningPoolsData> {
+async function loadMiningPoolsData(): Promise<MiningPoolsData> {
   if (!miningPoolsData) {
     try {
       const response = await fetch('/pools.json');
@@ -33,4 +35,15 @@ export async function loadMiningPoolsData(): Promise<MiningPoolsData> {
     }
   }
   return miningPoolsData!;
+}
+
+export const MINING_POOLS_QUERY_KEY = 'miningPools';
+
+export function useMiningPoolsData() {
+  return useQuery<MiningPoolsData>({
+    queryKey: [MINING_POOLS_QUERY_KEY],
+    queryFn: loadMiningPoolsData,
+    staleTime: Infinity, // Pools data rarely changes, so we can cache it indefinitely
+    gcTime: Infinity,
+  });
 }

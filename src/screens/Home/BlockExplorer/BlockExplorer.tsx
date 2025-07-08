@@ -1,13 +1,28 @@
 import './BlockExplorer.css';
 
+import type { ReactNode } from 'react';
+
 import { BCH, BTC, ETH } from '../../../icons';
 
+import type { AssetSymbol } from './BlockExplorerItem/api/useGetCurrentAssetPrice';
 import { BlockExplorerItem } from './BlockExplorerItem/BlockExplorerItem';
 
-const ASSETS = [
-  { code: 'btc', name: 'Bitcoin', icon: <BTC />, price: '$9,273.76' },
-  { code: 'eth', name: 'Ethereum', icon: <ETH />, price: '$188.03' },
-  { code: 'bch', name: 'Bitcoin Cash', icon: <BCH />, price: '$382.77' },
+const ASSETS: { name: string; icon: ReactNode; symbol: AssetSymbol }[] = [
+  {
+    name: 'Bitcoin',
+    icon: <BTC />,
+    symbol: 'BTC-USD',
+  },
+  {
+    name: 'Ethereum',
+    icon: <ETH />,
+    symbol: 'ETH-USD',
+  },
+  {
+    name: 'Bitcoin Cash',
+    icon: <BCH />,
+    symbol: 'BCH-USD',
+  },
 ];
 
 export function BlockExplorer() {
@@ -15,8 +30,13 @@ export function BlockExplorer() {
     <nav aria-label="Block Explorer" className="block-explorer-nav">
       <h2 className="block-explorer-title">Block Explorer</h2>
       <ul className="block-explorer-list">
-        {ASSETS.map(({ code, name, icon, price }) => (
-          <BlockExplorerItem key={code} name={name} price={price} icon={icon} />
+        {ASSETS.map(({ name, icon, symbol }) => (
+          <BlockExplorerItem
+            key={symbol}
+            name={name}
+            symbol={symbol}
+            icon={icon}
+          />
         ))}
       </ul>
     </nav>

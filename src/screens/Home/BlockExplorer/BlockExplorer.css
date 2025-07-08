@@ -20,6 +20,22 @@
   margin: 0;
 }
 
+.block-explorer-error {
+  background-color: #fee;
+  color: #c33;
+  padding: 0.5rem;
+  border-radius: var(--radius);
+  font-size: 0.875rem;
+  border: 0.0625rem solid #fcc;
+}
+
+.block-explorer-status {
+  color: var(--text-color-secondary);
+  font-size: 0.875rem;
+  text-align: center;
+  padding: 0.5rem;
+}
+
 @media (max-width: 60rem) {
   .block-explorer-nav {
     min-width: unset;

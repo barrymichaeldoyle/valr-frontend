@@ -1,7 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
+import type { MiningPoolsData } from '../useGetMiningPoolsData/useGetMiningPoolsData';
+
 import { identifyMinerFromCoinbase } from './utils/identifyMinerFromCoinbase';
-import { loadMiningPoolsData } from './utils/loadMiningPoolsData';
 
 export type GetSingleTransactionResponse = {
   hash: string;
@@ -49,24 +50,24 @@ export function getLastestBlockItemMinerQueryKey(txHash: string) {
   return ['lastestBlockItemMiner', txHash];
 }
 
-export function useGetLastestBlockItemMiner(txHash: string) {
+export function useGetLastestBlockItemMiner(
+  txHash: string,
+  poolsData: MiningPoolsData | undefined
+) {
   return useQuery({
     queryKey: getLastestBlockItemMinerQueryKey(txHash),
-    queryFn: () => getMiner(txHash),
+    queryFn: () => getMiner(txHash, poolsData!),
+    enabled: !!poolsData, // Only run the query when pools data is available
   });
 }
 
-async function getMiner(txHash: string): Promise<string> {
-  /**
-   * Fetching the tx data and the mining pools data in parallel
-   * since they are independent of each other
-   */
-  const [txData, poolsData] = await Promise.all([
-    fetch(`https://blockchain.info/rawtx/${txHash}?format=json&cors=true`).then(
-      response => response.json()
-    ),
-    loadMiningPoolsData(),
-  ]);
+async function getMiner(
+  txHash: string,
+  poolsData: MiningPoolsData
+): Promise<string> {
+  const txData = await fetch(
+    `https://blockchain.info/rawtx/${txHash}?format=json&cors=true`
+  ).then(response => response.json());
 
   const minerName = identifyMinerFromCoinbase(txData, poolsData);
 

@@ -3,7 +3,7 @@ import './LatestBlockTableRow.css';
 import type { KeyboardEvent } from 'react';
 import { useNavigate } from 'react-router';
 
-import type { GetBlockSummaryResponseItem } from '../../../../api';
+import type { GetBlockSummaryResponseItem } from '../api';
 
 import { MinerCell } from './MinerCell/MinerCell';
 import { formatHash, formatTimestamp, pluralize } from './utils';

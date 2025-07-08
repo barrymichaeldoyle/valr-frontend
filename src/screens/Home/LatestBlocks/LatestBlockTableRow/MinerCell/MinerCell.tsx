@@ -1,15 +1,19 @@
-import { useGetLastestBlockItemMiner } from '../../../../../api';
 import { LoadingSpinner } from '../../../../../components';
 import { UNKNOWN_MINER_FALLBACK_TEXT } from '../../../../../constants';
+import { useGetLastestBlockItemMiner, useMiningPoolsData } from '../../api';
 
 interface MinerCellProps {
   txHash: string;
 }
 
 export function MinerCell({ txHash }: MinerCellProps) {
-  const { data: miner, isLoading } = useGetLastestBlockItemMiner(txHash);
+  const { data: poolsData, isLoading: poolsLoading } = useMiningPoolsData();
+  const { data: miner, isLoading: minerLoading } = useGetLastestBlockItemMiner(
+    txHash,
+    poolsData
+  );
 
-  if (isLoading) {
+  if (poolsLoading || minerLoading) {
     return (
       <span className="miner-text">
         <LoadingSpinner size="small" />

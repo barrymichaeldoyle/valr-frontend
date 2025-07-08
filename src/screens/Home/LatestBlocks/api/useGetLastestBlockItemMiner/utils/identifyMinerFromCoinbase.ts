@@ -1,7 +1,6 @@
-import { UNKNOWN_MINER_FALLBACK_TEXT } from '../../../constants';
+import { UNKNOWN_MINER_FALLBACK_TEXT } from '../../../../../../constants';
+import type { MiningPoolsData } from '../../useGetMiningPoolsData/useGetMiningPoolsData';
 import type { GetSingleTransactionResponse } from '../useGetLastestBlockItemMiner';
-
-import type { MiningPoolsData } from './loadMiningPoolsData';
 
 /**
  * Identify the miner from the coinbase script
