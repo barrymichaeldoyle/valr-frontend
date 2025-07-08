@@ -1,2 +1,2 @@
-export * from './useGetBlockDetails/useGetBlockDetails';
+export * from './useGetLastestBlockItemMiner/useGetLastestBlockItemMiner';
 export * from './useGetLatestBlocksSummary/useGetLatestBlocksSummary';

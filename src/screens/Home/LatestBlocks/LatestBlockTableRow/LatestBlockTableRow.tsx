@@ -1,14 +1,12 @@
 import './LatestBlockTableRow.css';
 
+import type { KeyboardEvent } from 'react';
 import { useNavigate } from 'react-router';
 
-import { useGetBlockDetails } from '../../../../api';
-
-import { LoadingCell } from './components';
-import { formatHash, formatTimestamp, pluralize } from './utils';
-
 import type { GetBlockSummaryResponseItem } from '../../../../api';
-import type { KeyboardEvent } from 'react';
+
+import { MinerCell } from './MinerCell/MinerCell';
+import { formatHash, formatTimestamp, pluralize } from './utils';
 
 interface LatestBlockTableRowProps {
   block: GetBlockSummaryResponseItem;
@@ -20,12 +18,6 @@ export function LatestBlockTableRow({
   index,
 }: LatestBlockTableRowProps) {
   const navigate = useNavigate();
-
-  const {
-    data: blockDetails,
-    isLoading,
-    error,
-  } = useGetBlockDetails(block.hash);
 
   function handleRowClick() {
     navigate(`/${block.height}`);
@@ -61,20 +53,7 @@ export function LatestBlockTableRow({
       </td>
       <td className="mined-cell">{formatTimestamp(block.time)}</td>
       <td className="miner-cell">
-        <LoadingCell
-          isLoading={isLoading}
-          error={error}
-          data={blockDetails?.miner}
-          renderData={miner => (
-            <span
-              className={`miner-text${miner === 'Unknown' ? '' : ' block-link'}`}
-              title={miner}
-            >
-              {miner}
-            </span>
-          )}
-          fallbackText="Unknown"
-        />
+        <MinerCell txHash={block.tx[0]} />
       </td>
       <td className="size-cell">{formatSize(block.size)}</td>
     </tr>
