@@ -28,13 +28,6 @@
   background: rgba(59, 130, 246, 0.1);
 }
 
-/* Cell styles */
-.block-link {
-  color: var(--text-color-link);
-  text-decoration: none;
-  font-weight: 600;
-}
-
 /* Hash cell specific styling */
 .hash-cell {
   overflow: hidden;

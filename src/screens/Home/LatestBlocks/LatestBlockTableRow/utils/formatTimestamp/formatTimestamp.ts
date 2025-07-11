@@ -1,4 +1,4 @@
-import { pluralize } from '../pluralize/pluralize';
+import { pluralize } from '../../../../../../util/pluralize/pluralize';
 
 /**
  * Formats a Unix timestamp into a human-readable relative time string.

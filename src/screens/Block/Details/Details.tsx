@@ -5,10 +5,18 @@ import {
   LoadingContainer,
   NotFoundContainer,
 } from '../../../components';
+import { formatNumber, formatSize, satoshisToBTC } from '../../../util';
 
 import { useGetBlockDetails } from './api';
 import { DetailItem } from './components';
-import { formatDateTime } from './utils';
+import { Confirmations } from './components/Confirmations/Confirmations';
+import { Miner } from './components/Miner/Miner';
+import {
+  calculateBlockReward,
+  calculateDifficultyFromBits,
+  calculateTransactionVolume,
+  formatDateTime,
+} from './utils';
 
 interface DetailsProps {
   blockHash: string;
@@ -40,21 +48,36 @@ export function Details({ blockHash }: DetailsProps) {
       <dl>
         {/* TODO: create copy icon functionality to copy the hash */}
         <DetailItem label="Hash" value={blockHash} />
-        <DetailItem label="Confirmations" value="TODO" />
+        <DetailItem
+          label="Confirmations"
+          value={<Confirmations blockHash={blockHash} />}
+        />
         <DetailItem label="Timestamp" value={formatDateTime(data.time)} />
-        <DetailItem label="Height" value={data.height} />
-        <DetailItem label="Miner" value="TODO" />
-        <DetailItem label="Number of Transactions" value="TODO" />
-        <DetailItem label="Difficulty" value="TODO" />
-        <DetailItem label="Merkle root" value="TODO" />
-        <DetailItem label="Version" value="TODO" />
-        <DetailItem label="Bits" value="TODO" />
-        <DetailItem label="Weight" value="TODO" />
-        <DetailItem label="Size" value="TODO" />
-        <DetailItem label="Nonce" value="TODO" />
-        <DetailItem label="Transaction Volume" value="TODO" />
-        <DetailItem label="Block Reward" value="TODO" />
-        <DetailItem label="Fee Reward" value="TODO" />
+        <DetailItem label="Height" value={formatNumber(data.height)} />
+        <DetailItem label="Miner" value={<Miner details={data} />} />
+        <DetailItem
+          label="Number of Transactions"
+          value={formatNumber(data.n_tx)}
+        />
+        <DetailItem
+          label="Difficulty"
+          value={calculateDifficultyFromBits(data.bits)}
+        />
+        <DetailItem label="Merkle root" value={data.mrkl_root} />
+        <DetailItem label="Version" value={`0x${data.ver.toString(16)}`} />
+        <DetailItem label="Bits" value={formatNumber(data.bits)} />
+        <DetailItem label="Weight" value={`${formatNumber(data.weight)} WU`} />
+        <DetailItem label="Size" value={formatSize(data.size)} />
+        <DetailItem label="Nonce" value={formatNumber(data.nonce)} />
+        <DetailItem
+          label="Transaction Volume"
+          value={calculateTransactionVolume(data)}
+        />
+        <DetailItem label="Block Reward" value={calculateBlockReward(data)} />
+        <DetailItem
+          label="Fee Reward"
+          value={`${satoshisToBTC(data.fee)} BTC`}
+        />
       </dl>
     </>
   );

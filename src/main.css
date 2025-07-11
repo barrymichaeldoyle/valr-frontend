@@ -44,9 +44,15 @@ main {
 }
 
 a {
-  color: #587da5;
-  font-weight: 500;
+  color: var(--text-color-link);
+  font-weight: 600;
   text-decoration: inherit;
+}
+
+.link {
+  color: var(--text-color-link);
+  font-weight: 600;
+  text-decoration: none;
 }
 
 a:hover {

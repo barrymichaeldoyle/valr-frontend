@@ -1,1 +1,1 @@
-export const UNKNOWN_MINER_FALLBACK_TEXT = 'Unknown';
+export const UNKNOWN_FALLBACK_TEXT = 'Unknown';

@@ -1,5 +1,5 @@
 import type { MiningPoolsData } from '../../../../../api';
-import { UNKNOWN_MINER_FALLBACK_TEXT } from '../../../../../constants';
+import { UNKNOWN_FALLBACK_TEXT } from '../../../../../constants';
 
 /**
  * Identify the miner from the coinbase script
@@ -12,7 +12,7 @@ export function identifyMinerFromCoinbase(
   coinbaseScript?: string
 ): string {
   if (!coinbaseScript || !poolsData?.coinbase_tags) {
-    return UNKNOWN_MINER_FALLBACK_TEXT;
+    return UNKNOWN_FALLBACK_TEXT;
   }
 
   /**
@@ -48,5 +48,5 @@ export function identifyMinerFromCoinbase(
    */
   console.warn('[MinerDebug] pool not found for decodedScript:', decodedScript);
 
-  return UNKNOWN_MINER_FALLBACK_TEXT;
+  return UNKNOWN_FALLBACK_TEXT;
 }

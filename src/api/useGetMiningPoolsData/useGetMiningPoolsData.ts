@@ -39,7 +39,7 @@ async function loadMiningPoolsData(): Promise<MiningPoolsData> {
 
 export const MINING_POOLS_QUERY_KEY = 'miningPools';
 
-export function useMiningPoolsData() {
+export function useGetMiningPoolsData() {
   return useQuery<MiningPoolsData>({
     queryKey: [MINING_POOLS_QUERY_KEY],
     queryFn: loadMiningPoolsData,

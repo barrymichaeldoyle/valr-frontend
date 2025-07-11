@@ -8,6 +8,9 @@ export type Output = {
   script: string;
   spending_outpoints: SpendingOutpoint[];
   spent: boolean;
+  tx_index: number;
+  type: number;
+  value: number;
 };
 
 type SpendingOutpoint = {

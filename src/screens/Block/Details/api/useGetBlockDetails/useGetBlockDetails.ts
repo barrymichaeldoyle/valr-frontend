@@ -40,7 +40,7 @@ export type BlockDetails = {
     vout_sz: number;
     weight: number;
   }[];
-  version: number;
+  ver: number;
   weight: number;
 };
 

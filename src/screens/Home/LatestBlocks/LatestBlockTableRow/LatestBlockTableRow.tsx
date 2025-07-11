@@ -3,10 +3,11 @@ import './LatestBlockTableRow.css';
 import type { KeyboardEvent } from 'react';
 import { useNavigate } from 'react-router';
 
+import { formatNumber, formatSize } from '../../../../util';
 import type { GetBlockSummaryResponseItem } from '../api';
 
 import { MinerCell } from './MinerCell/MinerCell';
-import { formatHash, formatTimestamp, pluralize } from './utils';
+import { formatHash, formatTimestamp } from './utils';
 
 interface LatestBlockTableRowProps {
   block: GetBlockSummaryResponseItem;
@@ -30,10 +31,6 @@ export function LatestBlockTableRow({
     }
   }
 
-  function formatSize(bytes: number): string {
-    return `${bytes.toLocaleString()} ${pluralize(bytes, 'byte', 'bytes')}`;
-  }
-
   return (
     <tr
       key={index}
@@ -43,10 +40,8 @@ export function LatestBlockTableRow({
       tabIndex={0}
       aria-label={`Block ${block.height}. Click to view details.`}
     >
-      <td className="height-cell block-link">
-        {block.height.toLocaleString()}
-      </td>
-      <td className="hash-cell block-link">
+      <td className="height-cell link">{formatNumber(block.height)}</td>
+      <td className="hash-cell link">
         <span className="hash-text" title={block.hash}>
           {formatHash(block.hash)}
         </span>
