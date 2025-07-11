@@ -4,7 +4,7 @@ import type { ReactNode } from 'react';
 
 import { BCH, BTC, ETH } from '../../../icons';
 
-import type { AssetSymbol } from './BlockExplorerItem/api/useGetCurrentAssetPrice';
+import type { AssetSymbol } from './BlockExplorerItem/api';
 import { BlockExplorerItem } from './BlockExplorerItem/BlockExplorerItem';
 
 const ASSETS: { name: string; icon: ReactNode; symbol: AssetSymbol }[] = [

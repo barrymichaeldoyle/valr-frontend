@@ -508,6 +508,14 @@
     "SpiderPool": {
       "name": "SpiderPool",
       "link": "https://www.spiderpool.com"
+    },
+    "Luxor": {
+      "name": "Luxor",
+      "link": "https://www.luxor.tech"
+    },
+    "Ultimus": {
+      "name": "Ultimus",
+      "link": "https://www.ultimuspool.com/en"
     }
   }
 }

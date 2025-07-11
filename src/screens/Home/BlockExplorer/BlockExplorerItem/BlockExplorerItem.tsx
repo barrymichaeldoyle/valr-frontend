@@ -1,10 +1,7 @@
 import { useMemo } from 'react';
 import './BlockExplorerItem.css';
 
-import {
-  useGetCurrentAssetPrice,
-  type AssetSymbol,
-} from './api/useGetCurrentAssetPrice';
+import { useGetCurrentAssetPrice, type AssetSymbol } from './api';
 
 interface BlockExplorerItemProps {
   name: string;
@@ -17,7 +14,7 @@ export function BlockExplorerItem({
   symbol,
   icon,
 }: BlockExplorerItemProps) {
-  const { data: priceData, isLoading, error } = useGetCurrentAssetPrice(symbol);
+  const { data: price, isLoading, error } = useGetCurrentAssetPrice(symbol);
 
   const priceDisplay = useMemo(() => {
     if (isLoading) {
@@ -26,7 +23,7 @@ export function BlockExplorerItem({
     if (error) {
       return 'Error';
     }
-    if (!priceData?.price) {
+    if (!price) {
       return 'No data';
     }
 
@@ -35,8 +32,8 @@ export function BlockExplorerItem({
       currency: 'USD',
       minimumFractionDigits: 2,
       maximumFractionDigits: 2,
-    }).format(priceData.price);
-  }, [isLoading, error, priceData?.price]);
+    }).format(price);
+  }, [isLoading, error, price]);
 
   return (
     <li className="block-explorer-item">

@@ -1,15 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
-export type AssetSymbol = 'BTC-USD' | 'ETH-USD' | 'BCH-USD';
-
-interface PriceData {
-  price: number;
-  change24h: number;
-  changePercent24h: number;
-  volume24h: number;
-  high24h: number;
-  low24h: number;
-}
+import { getBlockchainAssetPrice } from './services/blockchain';
+import { getValrAssetPrice } from './services/valr';
+import type { AssetSymbol } from './types';
 
 export function getCurrentAssetPriceQueryKey(symbol: AssetSymbol) {
   return ['currentAssetPrice', symbol];
@@ -24,32 +17,25 @@ export function useGetCurrentAssetPrice(symbol: AssetSymbol) {
   });
 }
 
-async function getCurrentAssetPrice(symbol: AssetSymbol): Promise<PriceData> {
+/**
+ * Get the current asset price from the blockchain API or the VALR API.
+ * If the blockchain API key is not set, use the VALR API.
+ *
+ * Note: The reason I added the VALR fallback approach is because the blockchain API
+ * for prices seems to be deprecated (see https://exchange.blockchain.com/)
+ *
+ * @param symbol - The asset symbol
+ * @returns The current asset price in USD
+ */
+async function getCurrentAssetPrice(symbol: AssetSymbol): Promise<number> {
   const apiKey = import.meta.env.VITE_BLOCKCHAIN_API_KEY;
 
   if (!apiKey) {
-    throw new Error('Blockchain API key not found');
+    /**
+     * Use VALR API if blockchain API key is not set.
+     */
+    return await getValrAssetPrice(symbol);
   }
 
-  const response = await fetch(
-    `https://api.blockchain.com/v3/exchange/tickers/${symbol}`,
-    { headers: { 'X-API-Token': apiKey, 'Content-Type': 'application/json' } }
-  );
-
-  if (!response.ok) {
-    throw new Error(
-      `Failed to fetch price for ${symbol}: ${response.statusText}`
-    );
-  }
-
-  const data = await response.json();
-
-  return {
-    price: parseFloat(data.price_24h),
-    change24h: parseFloat(data.price_24h) - parseFloat(data.price_24h),
-    changePercent24h: parseFloat(data.price_24h_change_percent),
-    volume24h: parseFloat(data.volume_24h),
-    high24h: parseFloat(data.high_24h),
-    low24h: parseFloat(data.low_24h),
-  };
+  return await getBlockchainAssetPrice(symbol);
 }
