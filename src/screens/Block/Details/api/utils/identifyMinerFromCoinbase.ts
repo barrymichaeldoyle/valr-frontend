@@ -1,6 +1,5 @@
-import { UNKNOWN_MINER_FALLBACK_TEXT } from '../../../../../../constants';
-import type { MiningPoolsData } from '../../useGetMiningPoolsData/useGetMiningPoolsData';
-import type { GetSingleTransactionResponse } from '../useGetLastestBlockItemMiner';
+import type { MiningPoolsData } from '../../../../../api';
+import { UNKNOWN_MINER_FALLBACK_TEXT } from '../../../../../constants';
 
 /**
  * Identify the miner from the coinbase script
@@ -9,11 +8,9 @@ import type { GetSingleTransactionResponse } from '../useGetLastestBlockItemMine
  * @returns The miner name or the fallback text if the miner is not found
  */
 export function identifyMinerFromCoinbase(
-  txData: GetSingleTransactionResponse,
-  poolsData: MiningPoolsData
+  poolsData: MiningPoolsData,
+  coinbaseScript?: string
 ): string {
-  const coinbaseScript = txData.inputs[0]?.script || '';
-
   if (!coinbaseScript || !poolsData?.coinbase_tags) {
     return UNKNOWN_MINER_FALLBACK_TEXT;
   }

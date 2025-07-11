@@ -1,6 +1,7 @@
+import { useMiningPoolsData } from '../../../../../api';
 import { LoadingSpinner } from '../../../../../components';
 import { UNKNOWN_MINER_FALLBACK_TEXT } from '../../../../../constants';
-import { useGetLastestBlockItemMiner, useMiningPoolsData } from '../../api';
+import { useGetLatestBlockItemMiner } from '../../api';
 
 interface MinerCellProps {
   txHash: string;
@@ -8,7 +9,7 @@ interface MinerCellProps {
 
 export function MinerCell({ txHash }: MinerCellProps) {
   const { data: poolsData, isLoading: poolsLoading } = useMiningPoolsData();
-  const { data: miner, isLoading: minerLoading } = useGetLastestBlockItemMiner(
+  const { data: miner, isLoading: minerLoading } = useGetLatestBlockItemMiner(
     txHash,
     poolsData
   );

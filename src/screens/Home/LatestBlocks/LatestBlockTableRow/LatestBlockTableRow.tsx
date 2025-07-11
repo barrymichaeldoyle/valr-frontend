@@ -20,7 +20,7 @@ export function LatestBlockTableRow({
   const navigate = useNavigate();
 
   function handleRowClick() {
-    navigate(`/${block.height}`);
+    navigate(`/${block.hash}`);
   }
 
   function handleKeyDown(e: KeyboardEvent) {

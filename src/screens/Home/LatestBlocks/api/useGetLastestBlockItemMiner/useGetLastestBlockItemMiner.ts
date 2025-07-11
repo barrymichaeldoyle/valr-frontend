@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-import type { MiningPoolsData } from '../useGetMiningPoolsData/useGetMiningPoolsData';
-
-import { identifyMinerFromCoinbase } from './utils/identifyMinerFromCoinbase';
+import type { MiningPoolsData, Output } from '../../../../../api';
+import { identifyMinerFromCoinbase } from '../../../../Block/Details/api/utils/identifyMinerFromCoinbase';
 
 export type GetSingleTransactionResponse = {
   hash: string;
@@ -24,44 +23,27 @@ export type GetSingleTransactionResponse = {
     witness: string;
     script: string;
     index: number;
-    prev_out: {
-      type: number;
-      spent: boolean;
-      value: number;
-      spending_outpoints: { tx_index: number; n: number }[];
-      n: number;
-      tx_index: number;
-      script: string;
-    };
+    prev_out: Output;
   }[];
-  out: {
-    type: number;
-    spent: false;
-    value: number;
-    spending_outpoints: [];
-    n: number;
-    tx_index: number;
-    script: string;
-    addr: string;
-  }[];
+  out: Output[];
 };
 
-export function getLastestBlockItemMinerQueryKey(txHash: string) {
+export function getLatestBlockItemMinerQueryKey(txHash: string) {
   return ['lastestBlockItemMiner', txHash];
 }
 
-export function useGetLastestBlockItemMiner(
+export function useGetLatestBlockItemMiner(
   txHash: string,
   poolsData: MiningPoolsData | undefined
 ) {
   return useQuery({
-    queryKey: getLastestBlockItemMinerQueryKey(txHash),
-    queryFn: () => getMiner(txHash, poolsData!),
+    queryKey: getLatestBlockItemMinerQueryKey(txHash),
+    queryFn: () => getLatestBlockItemMiner(txHash, poolsData!),
     enabled: !!poolsData, // Only run the query when pools data is available
   });
 }
 
-async function getMiner(
+async function getLatestBlockItemMiner(
   txHash: string,
   poolsData: MiningPoolsData
 ): Promise<string> {
@@ -69,7 +51,10 @@ async function getMiner(
     `https://blockchain.info/rawtx/${txHash}?format=json&cors=true`
   ).then(response => response.json());
 
-  const minerName = identifyMinerFromCoinbase(txData, poolsData);
+  const minerName = identifyMinerFromCoinbase(
+    poolsData,
+    txData.inputs[0]?.script
+  );
 
   return minerName;
 }
