@@ -61,5 +61,9 @@ async function getBlockDetails(blockHash: string): Promise<BlockDetails> {
   );
   const data = await response.json();
 
+  if (data.error === 'not-found-or-invalid-arg') {
+    throw new Error('Block not found');
+  }
+
   return data;
 }

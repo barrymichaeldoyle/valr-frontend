@@ -17,6 +17,8 @@ interface DetailsProps {
 export function Details({ blockHash }: DetailsProps) {
   const { data, error, isLoading } = useGetBlockDetails(blockHash);
 
+  console.log({ data, error, isLoading });
+
   if (isLoading) {
     return <LoadingContainer message="Fetching block details..." />;
   }
