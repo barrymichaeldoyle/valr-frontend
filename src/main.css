@@ -1,7 +1,7 @@
 :root {
   background-color: #ffffff;
   color: var(--text-color);
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
   line-height: 1.5;
   font-synthesis: none;
@@ -9,6 +9,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
+  --border-muted: 0.0625rem solid #ccc;
   --focus-color: #3b82f6;
   --focus: 0.25rem auto var(--focus-color);
   --radius: 0.2rem;
