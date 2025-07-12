@@ -1,27 +1,40 @@
+import { useMemo } from 'react';
+
 import { useGetMiningPoolsData } from '../../../../../api';
-import { LoadingSpinner } from '../../../../../components';
 import { type BlockDetails } from '../../api';
 import { identifyMinerFromCoinbase } from '../../api/utils/identifyMinerFromCoinbase';
+import { DetailItemSpinner } from '../DetailItemSpinner/DetailItemSpinner';
 
 interface MinerProps {
   details: BlockDetails;
 }
 
 export function Miner({ details }: MinerProps) {
-  const { data: poolsData, isLoading: poolsLoading } = useGetMiningPoolsData();
+  const {
+    data: poolsData,
+    isLoading: poolsLoading,
+    error: poolsError,
+  } = useGetMiningPoolsData();
+  const coinbaseScript = details.tx[0].inputs[0].script;
+
+  const miner = useMemo(
+    () => identifyMinerFromCoinbase(poolsData, coinbaseScript),
+    [poolsData, coinbaseScript]
+  );
 
   if (poolsLoading) {
-    return <LoadingSpinner size="small" />;
+    return <DetailItemSpinner />;
+  }
+
+  if (poolsError) {
+    return (
+      <span className="secondary-text">Error fetching miner pool data</span>
+    );
   }
 
   if (!poolsData) {
-    return <span className="">No Miner Pool Data Found</span>;
+    return <span className="secondary-text">No miner pool data found</span>;
   }
-
-  const miner = identifyMinerFromCoinbase(
-    poolsData,
-    details.tx[0].inputs[0].script
-  );
 
   return (
     <span className="link" title={miner}>

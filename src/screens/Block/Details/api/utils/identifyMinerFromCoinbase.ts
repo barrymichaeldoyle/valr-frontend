@@ -8,8 +8,8 @@ import { UNKNOWN_FALLBACK_TEXT } from '../../../../../constants';
  * @returns The miner name or the fallback text if the miner is not found
  */
 export function identifyMinerFromCoinbase(
-  poolsData: MiningPoolsData,
-  coinbaseScript?: string
+  poolsData: MiningPoolsData | undefined,
+  coinbaseScript: string | undefined
 ): string {
   if (!coinbaseScript || !poolsData?.coinbase_tags) {
     return UNKNOWN_FALLBACK_TEXT;

@@ -25,8 +25,6 @@ interface DetailsProps {
 export function Details({ blockHash }: DetailsProps) {
   const { data, error, isLoading } = useGetBlockDetails(blockHash);
 
-  console.log({ data, error, isLoading });
-
   if (isLoading) {
     return <LoadingContainer message="Fetching block details..." />;
   }
@@ -50,7 +48,7 @@ export function Details({ blockHash }: DetailsProps) {
         <DetailItem label="Hash" value={blockHash} />
         <DetailItem
           label="Confirmations"
-          value={<Confirmations blockHash={blockHash} />}
+          value={<Confirmations blockDetails={data} />}
         />
         <DetailItem label="Timestamp" value={formatDateTime(data.time)} />
         <DetailItem label="Height" value={formatNumber(data.height)} />
