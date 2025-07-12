@@ -1,0 +1,42 @@
+.transaction-item {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  border-bottom: var(--border-muted);
+  padding: 0.75rem;
+}
+
+.transaction-item-from,
+.transaction-item-to {
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.transaction-item-hash {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  min-width: 0;
+  flex: 1;
+}
+
+.transaction-item-hash > span {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 0;
+  flex: 1;
+}
+
+.transaction-item-arrow {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #139770;
+}
+
+.transaction-item-arrow svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: #139770;
+}

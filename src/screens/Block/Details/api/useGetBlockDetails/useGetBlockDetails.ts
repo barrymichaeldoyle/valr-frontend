@@ -2,6 +2,31 @@ import { useQuery } from '@tanstack/react-query';
 
 import type { Output } from '../../../../../api';
 
+export type Transaction = {
+  block_height: number;
+  block_index: number;
+  double_spend: boolean;
+  fee: number;
+  hash: string;
+  inputs: {
+    index: number;
+    prev_out: Output;
+    script: string;
+    sequence: number;
+    witness: string;
+  }[];
+  lock_time: number;
+  out: Output[];
+  relayed_by: string;
+  size: number;
+  time: number;
+  tx_index: number;
+  ver: number;
+  vin_sz: number;
+  vout_sz: number;
+  weight: number;
+};
+
 export type BlockDetails = {
   bits: number;
   block_index: number;
@@ -16,30 +41,7 @@ export type BlockDetails = {
   prev_block: string;
   size: number;
   time: number;
-  tx: {
-    block_height: number;
-    block_index: number;
-    double_spend: boolean;
-    fee: number;
-    hash: string;
-    inputs: {
-      index: number;
-      prev_out: Output;
-      script: string;
-      sequence: number;
-      witness: string;
-    }[];
-    lock_time: number;
-    out: Output[];
-    relayed_by: string;
-    size: number;
-    time: number;
-    tx_index: number;
-    ver: number;
-    vin_sz: number;
-    vout_sz: number;
-    weight: number;
-  }[];
+  tx: Transaction[];
   ver: number;
   weight: number;
 };

@@ -1,3 +1,9 @@
+.block-details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
 .block-description {
   font-size: 0.75rem;
   font-weight: 400;

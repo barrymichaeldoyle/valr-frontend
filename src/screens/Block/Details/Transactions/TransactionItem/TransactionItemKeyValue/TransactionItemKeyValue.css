@@ -1,0 +1,21 @@
+.transaction-item-key-value {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  padding: 0.5rem 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.transaction-item-key-value dt {
+  color: var(--text-color-secondary);
+  flex: 1;
+}
+
+.transaction-item-key-value dd {
+  flex: 6;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

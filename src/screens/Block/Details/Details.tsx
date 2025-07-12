@@ -11,6 +11,7 @@ import { useGetBlockDetails } from './api';
 import { DetailItem } from './components';
 import { Confirmations } from './components/Confirmations/Confirmations';
 import { Miner } from './components/Miner/Miner';
+import { Transactions } from './Transactions/Transactions';
 import {
   calculateBlockReward,
   calculateDifficultyFromBits,
@@ -38,7 +39,7 @@ export function Details({ blockHash }: DetailsProps) {
   }
 
   return (
-    <>
+    <div className="block-details">
       <p className="block-description">
         Block at depth {data.height} in the Bitcoin blockchain
       </p>
@@ -77,6 +78,8 @@ export function Details({ blockHash }: DetailsProps) {
           value={`${satoshisToBTC(data.fee)} BTC`}
         />
       </dl>
-    </>
+
+      <Transactions transactions={data.tx} />
+    </div>
   );
 }
