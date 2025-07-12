@@ -1,0 +1,25 @@
+.transaction-item-btc {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.transaction-item-btc-globe {
+  position: relative;
+  top: 0.075rem;
+}
+
+.transaction-item-btc-globe > svg {
+  width: 0.75rem;
+  height: 0.75rem;
+  stroke-width: 3;
+}
+
+.transaction-item-btc-globe.from {
+  color: var(--text-color-link);
+}
+
+.transaction-item-btc-globe.to {
+  color: var(--text-color-green);
+}

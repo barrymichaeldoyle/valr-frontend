@@ -4,6 +4,7 @@
   gap: 2rem;
   border-bottom: var(--border-muted);
   padding: 0.75rem;
+  font-size: 0.675rem;
 }
 
 .transaction-item-from,
@@ -12,10 +13,16 @@
   min-width: 0;
 }
 
+.transaction-item-to {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
 .transaction-item-hash {
   display: flex;
-  flex-direction: row;
-  gap: 0.25rem;
+  flex-direction: column;
+  gap: 0.5rem;
   min-width: 0;
   flex: 1;
 }
@@ -28,15 +35,53 @@
   flex: 1;
 }
 
-.transaction-item-arrow {
+.coinbase-label {
+  color: var(--text-color-green);
+  font-weight: bold;
+}
+
+.transaction-item-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.transaction-item-input {
   display: flex;
   align-items: center;
-  gap: 0.25rem;
-  color: #139770;
+  min-width: 0;
+}
+
+.transaction-item-input-address {
+  flex: 1 1 0%;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 0.5rem;
+  font-weight: 600;
+}
+
+.transaction-item-fee-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.transaction-item-arrow {
+  display: flex;
+  margin-top: 2rem;
+  color: var(--text-color-green);
 }
 
 .transaction-item-arrow svg {
   width: 1.5rem;
   height: 1.5rem;
-  fill: #139770;
+  fill: var(--text-color-green);
+}
+
+.transaction-date {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
 }
