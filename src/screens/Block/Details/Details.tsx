@@ -1,5 +1,8 @@
 import './Details.css';
 
+import Big from 'big.js';
+import { useMemo } from 'react';
+
 import {
   ErrorContainer,
   LoadingContainer,
@@ -7,7 +10,7 @@ import {
 } from '../../../components';
 import { formatNumber, formatSize, satoshisToBTC } from '../../../util';
 
-import { useGetBlockDetails } from './api';
+import { useGetBlockDetails, useGetLatestBlockHeight } from './api';
 import { DetailItem } from './components';
 import { Confirmations } from './components/Confirmations/Confirmations';
 import { Miner } from './components/Miner/Miner';
@@ -25,6 +28,21 @@ interface DetailsProps {
 
 export function Details({ blockHash }: DetailsProps) {
   const { data, error, isLoading } = useGetBlockDetails(blockHash);
+  const {
+    data: latestBlockHeight,
+    isLoading: isLatestBlockHeightLoading,
+    error: latestBlockHeightError,
+  } = useGetLatestBlockHeight();
+
+  const confirmations = useMemo(() => {
+    if (latestBlockHeight === undefined || data?.height === undefined) {
+      return undefined;
+    }
+
+    return formatNumber(
+      new Big(latestBlockHeight).minus(new Big(data.height)).plus(1).toNumber()
+    );
+  }, [latestBlockHeight, data?.height]);
 
   if (isLoading) {
     return <LoadingContainer message="Fetching block details..." />;
@@ -49,7 +67,13 @@ export function Details({ blockHash }: DetailsProps) {
         <DetailItem label="Hash" value={blockHash} />
         <DetailItem
           label="Confirmations"
-          value={<Confirmations blockDetails={data} />}
+          value={
+            <Confirmations
+              confirmations={confirmations}
+              isLatestBlockHeightLoading={isLatestBlockHeightLoading}
+              latestBlockHeightError={latestBlockHeightError}
+            />
+          }
         />
         <DetailItem label="Timestamp" value={formatDateTime(data.time)} />
         <DetailItem label="Height" value={formatNumber(data.height)} />
@@ -79,7 +103,7 @@ export function Details({ blockHash }: DetailsProps) {
         />
       </dl>
 
-      <Transactions transactions={data.tx} />
+      <Transactions confirmations={confirmations} transactions={data.tx} />
     </div>
   );
 }

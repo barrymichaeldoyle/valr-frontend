@@ -3,7 +3,7 @@ import './TransactionItem.css';
 import { ArrowBigRight } from 'lucide-react';
 import { useMemo } from 'react';
 
-import { formatNumber, formatSize } from '../../../../../util';
+import { formatSize } from '../../../../../util';
 import { satoshisToBTC } from '../../../../../util/satoshisToBTC/satoshisToBTC';
 import type { Transaction } from '../../api/useGetBlockDetails/useGetBlockDetails';
 import { formatDateTime } from '../../utils';
@@ -14,10 +14,14 @@ import { TransactionItemKeyValue } from './components/TransactionItemKeyValue/Tr
 const UNKNOWN_FEE_DETAIL = 'N/A';
 
 interface TransactionItemProps {
+  confirmations: string | undefined;
   transaction: Transaction;
 }
 
-export function TransactionItem({ transaction }: TransactionItemProps) {
+export function TransactionItem({
+  confirmations,
+  transaction,
+}: TransactionItemProps) {
   const isCoinbaseTransaction = useMemo(
     () =>
       transaction.inputs.length === 1 &&
@@ -136,7 +140,7 @@ export function TransactionItem({ transaction }: TransactionItemProps) {
                   {totalBTC}
                 </span>
                 <span className="transaction-item-confirmations-badge">
-                  {formatNumber(transaction.size)} Confirmations
+                  {confirmations} Confirmations
                 </span>
               </div>
             </div>

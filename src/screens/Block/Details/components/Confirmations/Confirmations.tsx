@@ -1,31 +1,27 @@
-import { formatNumber } from '../../../../../util';
-import type { BlockDetails } from '../../api';
 import { DetailItemSpinner } from '../DetailItemSpinner/DetailItemSpinner';
 
-import { useGetConfirmations } from './api/useGetConfirmations/useGetConfirmations';
-
 interface ConfirmationsProps {
-  blockDetails: BlockDetails;
+  confirmations: string | undefined;
+  isLatestBlockHeightLoading: boolean;
+  latestBlockHeightError: Error | null;
 }
 
-export function Confirmations({ blockDetails }: ConfirmationsProps) {
-  const {
-    data: confirmations,
-    isLoading,
-    error,
-  } = useGetConfirmations(blockDetails);
-
-  if (isLoading) {
+export function Confirmations({
+  confirmations,
+  isLatestBlockHeightLoading,
+  latestBlockHeightError,
+}: ConfirmationsProps) {
+  if (isLatestBlockHeightLoading) {
     return <DetailItemSpinner />;
   }
 
-  if (error) {
+  if (latestBlockHeightError) {
     return <span className="secondary-text">Error fetching confirmations</span>;
   }
 
   if (confirmations === undefined) {
-    return <span className="secondary-text">No confirmations found</span>;
+    return <span className="secondary-text">No confirmations data found</span>;
   }
 
-  return formatNumber(confirmations);
+  return confirmations;
 }

@@ -514,8 +514,12 @@
       "link": "https://www.luxor.tech"
     },
     "Ultimus": {
-      "name": "Ultimus",
+      "name": "Ultimus Pool",
       "link": "https://www.ultimuspool.com/en"
+    },
+    "MARA": {
+      "name": "MARA Pool",
+      "link": "https://mempool.space/mining/pool/marapool"
     }
   }
 }
