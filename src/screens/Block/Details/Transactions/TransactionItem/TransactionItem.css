@@ -1,10 +1,16 @@
 .transaction-item {
   display: flex;
-  flex-direction: row;
-  gap: 2rem;
+  flex-direction: column;
+  gap: 0;
   border-bottom: var(--border-muted);
   padding: 0.75rem;
   font-size: 0.675rem;
+}
+
+.transaction-item-from-to {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 .transaction-item-from,
@@ -70,7 +76,7 @@
 
 .transaction-item-arrow {
   display: flex;
-  margin-top: 2rem;
+  margin-top: 1.5rem;
   color: var(--text-color-green);
 }
 
@@ -84,4 +90,54 @@
   display: flex;
   flex: 1;
   justify-content: flex-end;
+}
+
+.transaction-item-fee-row {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.transaction-item-fee-container,
+.transaction-item-badges {
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.transaction-item-badges {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  margin-left: auto;
+}
+
+.transaction-item-badges-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.transaction-item-badges-container > span {
+  height: fit-content;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.transaction-item-total-btc-value-badge {
+  background-color: #c3ebd7;
+  color: var(--text-color-green);
+}
+
+.transaction-item-confirmations-badge {
+  color: #174ea6;
+  background-color: #afd2f8;
+}
+
+.transaction-item-total-btc-value-badge,
+.transaction-item-confirmations-badge {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  display: block;
 }
