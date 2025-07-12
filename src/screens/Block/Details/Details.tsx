@@ -13,6 +13,7 @@ import { formatNumber, formatSize, satoshisToBTC } from '../../../util';
 import { useGetBlockDetails, useGetLatestBlockHeight } from './api';
 import { DetailItem } from './components';
 import { Confirmations } from './components/Confirmations/Confirmations';
+import { Copy } from './components/Copy/Copy';
 import { Miner } from './components/Miner/Miner';
 import { Transactions } from './Transactions/Transactions';
 import {
@@ -63,8 +64,15 @@ export function Details({ blockHash }: DetailsProps) {
       </p>
 
       <dl>
-        {/* TODO: create copy icon functionality to copy the hash */}
-        <DetailItem label="Hash" value={blockHash} />
+        <DetailItem
+          label="Hash"
+          value={
+            <span className="block-details-hash">
+              {blockHash}
+              <Copy value={blockHash} />
+            </span>
+          }
+        />
         <DetailItem
           label="Confirmations"
           value={
